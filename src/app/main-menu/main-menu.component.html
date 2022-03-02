@@ -1,0 +1,62 @@
+<app-page-shell [lButton]="'info'" [navTitle]="'Main Menu'" [icon]="'fa-bars'" (messageEvent)="buttonClicked ($event)">
+    <img src="assets/graphics/poker-tournament.png" class="image">
+
+
+    <div class="btn-group2">
+        <button *ngFor="let num of seasonList" (click)="gotoSeason(num)" type="button"
+            class="btn-default roundButton segmentButton" [ngClass]="ngClassSegment(season,num)">
+            <div style="font-size: 10px;">Season</div>
+            <div style="font-size: 24px;"><b>{{num}}</b></div>
+        </button>
+        <app-button *ngIf="league" [routerLink]="['/view-stats']" [queryParams]="{league: league.id, season: season}"
+            [name]="'League Stats'" [icon]="'line-chart'"></app-button>
+    </div>
+
+    <div *ngIf="league">{{league.name}} - Season {{season}} (Week {{league.week}})</div>
+    <app-loading-bar *ngIf="loadingFlg"></app-loading-bar>
+    <table class="drTable" *ngIf="!loadingFlg && league && displayData" style="cursor: pointer;">
+        <tr style="font-size: 12px;">
+            <th>Rank</th>
+            <th *ngFor="let columnHeader of columnHeaders" (click)="sortby(columnHeader)"
+                [ngClass]="ngClassColumn(columnHeader)" style="cursor: pointer;">
+                <i *ngIf="sortbyCol == columnHeader && !sortByAscending" class="fa fa-arrow-down"></i>
+                <i *ngIf="sortbyCol == columnHeader && sortByAscending" class="fa fa-arrow-up"></i>
+                {{columnHeader}}
+            </th>
+        </tr>
+        <tr *ngFor="let player of displayData; let i = index" [routerLink]="['/player']" [queryParams]="{id: player.id}"
+            [title]="player.gameStr">
+            <td>{{i+1}}</td>
+            <td>
+                <div style="font-weight: 700;">
+                    <i *ngIf="player.place==1" class="fa fa-star" title="Leader"></i>
+                    <i *ngIf="player.place<=5 && player.place>1" class="fa fa-star-o" title="Top 5"></i>
+                    {{player.username}}
+                    <span *ngFor="let award_id of player.awards" style="color: purple;">
+                        <i *ngIf="award_id==1" class="fa fa-bullseye mr-1" title="Point Leader"></i>
+                        <i *ngIf="award_id==2" class="fa fa-money mr-1" title="Money Leader"></i>
+                        <i *ngIf="award_id==3" class="fa fa-usd mr-1" title="Most Cashed"></i>
+                        <i *ngIf="award_id==4" class="fa fa-certificate mr-1" title="Most Wins"></i>
+                        <i *ngIf="award_id==5" class="fa fa-trophy mr-1" title="Championship Win"></i>
+                    </span>
+                </div>
+                <div style="font-size: 10px; color: #666;">{{player.name}}</div>
+            </td>
+            <td *ngFor="let game of player.games" class="hidden-sm" [ngStyle]="ngStyleGame(game)">{{game.points}}</td>
+            <td class="hidden-sm" style="font-size: 12px; color: orange;">{{player.numGames}}</td>
+            <td style="font-weight: 800; font-size: 18px;">{{player.points}}</td>
+            <td style="color: green;">{{player.moneyStr}}</td>
+            <td>{{player.wins}}</td>
+        </tr>
+    </table>
+    <div><i class="fa fa-star-o"></i> - Top 5 spots earn discount into Championship Game</div>
+    <app-button *ngIf="user.id" (click)="edit()" [name]="'Edit League'" [icon]="'pencil'"></app-button>
+
+
+
+
+
+</app-page-shell>
+
+<app-login #loginModal (messageEvent)="refreshUser($event)"></app-login>
+<app-edit-league-popup #editLeagueModal></app-edit-league-popup>

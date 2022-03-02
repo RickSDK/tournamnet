@@ -1,0 +1,5 @@
+<button [disabled]="disabled" type="button" class="roundButton {{class}}" [title]="label"
+    [ngStyle]="ngStyleButton(styleNum, disabled, buttonObj.hover, buttonObj.clicked)" (mouseover)="buttonObj.hover=true"
+    (mouseleave)="buttonObj.hover=false" (mousedown)="buttonObj.clicked=true" (mouseup)="buttonObj.clicked=false">
+    <i *ngIf="icon" class="fa fa-{{icon}}"></i> {{name}}</button>
+<div *ngIf="label" style="font-size: 12px; color: white;"><i *ngIf="icon" class="fa fa-{{icon}}"></i> {{label}}</div>

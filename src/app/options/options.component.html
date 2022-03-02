@@ -1,0 +1,61 @@
+<app-page-shell [navTitle]="'Colors & Themes'" [icon]="'fa-paint-brush'" [rButton]="'home'">
+    <div *ngIf="currentTheme" [ngStyle]="ngStyleButton(4)" class="box">
+        <div><b>Current Color Scheme</b></div>
+        <span class="highlightedText">{{colorThemeName}}</span>
+        <table align="center">
+            <tr >
+                <td>
+                    Light Buttons: 
+                </td>
+                <td><input style="height: 44px; cursor: pointer;" id="lightColor" type="color" value="{{currentTheme.lightColor}}" (change)="colorPicked($event)"> </td>
+                <td>{{currentTheme.lightColor}}</td>
+            </tr>
+            <tr>
+                <td>
+                    Dark Buttons: 
+                </td>
+                <td><input style="height: 44px; cursor: pointer;" id="darkColor" type="color" value="{{currentTheme.darkColor}}" (change)="colorPicked($event)"> </td>
+                <td>{{currentTheme.darkColor}}</td>
+            </tr>
+            <tr>
+                <td>
+                    Navbar (Dark): 
+                </td>
+                 <td><input style="height: 44px; cursor: pointer;" id="navBarColor" type="color" value="{{currentTheme.navBarColor}}" (change)="colorPicked($event)"> </td>
+                <td>{{currentTheme.navBarColor}}</td>
+            </tr>
+            <tr>
+                <td>
+                    Gray (Light): 
+                </td>
+                <td><input style="height: 44px; cursor: pointer;" id="grayColor" type="color" value="{{currentTheme.grayColor}}" (change)="colorPicked($event)"> </td>
+                <td>{{currentTheme.grayColor}}</td>
+            </tr>
+        </table>
+    </div>
+    <div  [ngStyle]="ngStyleButton(4)" class="box">
+        <div class="btn-group">
+            <button *ngFor="let type of types; let i = index;" (click)="buttonIdx = i" type="button" class="btn btn-default roundButton segmentButton"
+                [ngStyle]="ngStyleSegment(buttonIdx,i)"> {{type}}
+            </button>
+        </div>
+    </div>
+    <div *ngFor="let theme of themes">
+        <div *ngIf="theme.type==-1 || theme.type==buttonIdx" class="optionClass" (click)="chooseTheme(theme)" [ngStyle]="ngStyleButton(1)"  (mouseover)="theme.hover=true" (mouseout)="theme.hover=false" [style.background-color]="theme.hover?'white':lightColor">
+            <table width="100%">
+                <tr>
+                    <td style="white-space: nowrap; overflow: hidden;">{{theme.name}}</td>
+                    <td align="right" style="white-space: nowrap; overflow: hidden;">
+                        <span class="square-outer">
+                            <span class="square" [style.background-color]="theme.lightColor" title="Light Buttons">&nbsp;</span>
+                            <span class="square" [style.background-color]="theme.darkColor" title="Dark Buttons">&nbsp;</span>
+                            <span class="square" [style.background-color]="theme.navBarColor" title="Navbar">&nbsp;</span>
+                            <span class="square" [style.background-color]="theme.grayColor" title="Gray Boxes">&nbsp;</span>    
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</app-page-shell>

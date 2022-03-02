@@ -1,0 +1,50 @@
+<app-page-shell [navTitle]="'View Stats'" [icon]="'fa-line-chart'">
+
+    <div *ngIf="league" style="font-size: 20px; font-weight: 700;">{{league.name}} - Lifetime Stats</div>
+    <div>({{minGames}} game minimum)</div>
+    <app-loading-bar *ngIf="loadingFlg"></app-loading-bar>
+
+    <table class="drTable" *ngIf="!loadingFlg && league && displayData" style="cursor: pointer;">
+        <tr style="font-size: 12px;">
+            <th>Rank</th>
+            <th *ngFor="let columnHeader of columnHeaders" (click)="sortby(columnHeader)"
+                [ngClass]="ngClassColumn(columnHeader)" style="cursor: pointer;">
+                <i *ngIf="sortbyCol == columnHeader && !sortByAscending" class="fa fa-arrow-down"></i>
+                <i *ngIf="sortbyCol == columnHeader && sortByAscending" class="fa fa-arrow-up"></i>
+                {{columnHeader}}
+            </th>
+        </tr>
+        <tr *ngFor="let player of displayData; let i = index" [routerLink]="['/player']" [queryParams]="{id: player.id}"
+            [title]="player.gameStr">
+            <td>{{i+1}}</td>
+            <td>
+                <div style="font-weight: 700;">
+                    {{player.username}}
+                </div>
+                <div style="font-size: 10px; color: #666;">{{player.name}}</div>
+            </td>
+            <td class="hidden-sm" style="color: orange;">{{player.numGames}}</td>
+            <td class="hidden-sm" style="color: purple;"><b *ngIf="player.wins>0"><i class="fa fa-trophy" ></i>{{player.wins}}</b></td>
+            <td class="hidden-sm">{{player.cashedGames}}</td>
+            <td class="hidden-sm">{{player.losses}}</td>
+            <td class="hidden-sm">{{player.streak}}</td>
+            <td><b>{{player.points}}</b></td>
+            <td style="color: green;">{{player.moneyStr}}</td>
+            <td class="hidden-sm">{{player.rebuys}}</td>
+             <td>
+                <div>{{player.pointMaker}}</div>
+                <div style="font-size: 10px; color: gray;">({{player.avePointMakerStr}} pts)</div>
+            </td>
+            <td>
+                <div>{{player.moneyMaker}}</div>
+                <div style="font-size: 10px; color: gray;">({{player.aveMoneyStr}})</div>
+            </td>
+            <td>
+                <div>{{player.winRating}}</div>
+                <div style="font-size: 10px; color: gray;">({{player.wins}})</div>
+            </td>
+            <td><b>{{player.skill}}</b></td>
+        </tr>
+    </table>
+
+</app-page-shell>

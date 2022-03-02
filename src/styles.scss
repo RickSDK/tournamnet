@@ -1,1 +1,191 @@
-/* You can add global styles to this file, and also import other style files */
+body {background-color: #bbb !important;}
+
+.image {
+  width: 100%;
+}
+input {
+   border: 4px solid gray;
+   margin: 5px;
+   border-radius: 5px; 
+	padding: 3px;
+}
+.blackBox {
+   border: 1px solid black; 
+   background-color: #aaa;
+   color: black;
+   border-radius: 5px;
+   margin: 10px; 
+   padding: 5px;
+}
+.box {
+   border: 1px solid black; 
+   border-radius: 5px;
+   margin: 10px; 
+   padding: 5px;
+   box-shadow: 1px 1px 3px #444;
+}
+.darkBox {
+   background-color: #444;
+   color: white;
+   padding: 10px;
+}
+.highlightedText {
+   background-color: #ccf;
+   padding: 2px;
+   color: black;
+   font-weight: 700;
+}
+.roundButton2 {
+    border: 1px solid #000 !important;
+    box-shadow: 1px 1px 3px #444;
+    margin: 5px;
+    border-radius: 10px;
+  }
+ .roundButton2:hover {
+    box-shadow: 2px 2px 3px black;
+ }
+ .smallText {
+    font-size: 10px;
+ }
+ .largeText {
+   font-size: 18px;
+}
+.inputFieldBox {
+   display: block;
+	border: 1px solid #ccc;
+   background-color: #ddd; 
+   color: black;
+	margin: 6px;
+   border-radius: 5px; 
+	padding: 3px;
+	box-shadow: 1px 1px 1px #777; 
+}
+.ptpCell {
+   height: 55px;
+   border-bottom: 1px solid gray;
+}
+//-----buttons
+.mediumBtn {
+   width: 100%; 
+   max-width: 250px; 
+   height: 50px; 
+   font-size: 28px; 
+   font-weight: 500;
+}
+.largeBtn {
+   width: 100%; 
+   max-width: 300px; 
+   height: 60px; 
+   font-size: 32px; 
+   font-weight: 700;
+}
+.segmentButton {
+   margin: 0;
+   flex: 1 1 auto;
+   text-align: center;
+}
+.btn-group>.btn-group:not(:last-child)>.segmentButton, .btn-group>.segmentButton:not(:last-child):not(.dropdown-toggle) {
+   border-top-right-radius: 0;
+   border-bottom-right-radius: 0;
+}
+.btn-group>.btn-group:not(:first-child)>.segmentButton, .btn-group>.segmentButton:not(:first-child) {
+   border-top-left-radius: 0;
+   border-bottom-left-radius: 0;
+}
+.roundButton {
+   border: 1px solid black !important;
+   box-shadow: 1px 1px 3px #444;
+   min-height: 44px;
+   padding: .375rem .75rem;
+   /*Rounded Corners*/
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 7px;
+    
+    /*Gradient*/
+    background-image: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -moz-linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -o-linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: -ms-linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    
+    /*Shadow*/
+    -webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+
+    }
+   .roundButton:hover {
+     background-color: white;
+     color: black;
+     box-shadow: 4px 4px 5px #000;
+     border: 1px solid white;
+  }
+  .roundButton:active {
+   background-color: black;
+   color: white;
+   box-shadow: 1px 1px 0px #000;
+  }
+  //------table
+  .drTable {
+	width: 100%;
+	color: black;
+	border: 1px solid black;
+	overflow: hidden;
+	border-radius: 10px; 
+    box-shadow: 5px 5px 5px #777; 
+  }
+  .drTable th {
+	font-weight: 500;
+    background-color: #777;
+    color: white;
+  }
+  .drTable tr:nth-child(even){
+	background-color: #eee;
+  }
+  .drTable tr:nth-child(odd){
+	background-color: #fff;
+  }
+  .drTable tr:hover{
+	background-color: #eef;
+  }
+  .drTableNameRow {
+	text-align: right;
+	padding: 10px;
+	font-weight: 700;
+	font-size: 14px;
+}
+.drTableValueRow {
+	text-align: left;
+	padding: 10px;
+	font-size: 14px;
+}
+
+  .large-text {
+   font-size: 24px;
+  }
+.optionClass {
+     height: 44px;
+     font-size: 28px;
+     border-bottom: 1px solid gray;
+     color: black;
+     cursor: pointer;
+     text-align: center;
+}
+.optionClass2 {
+   height: 44px;
+   line-height: 44px;
+   font-size: 18px;
+   border-bottom: 1px solid gray;
+   color: black;
+   cursor: pointer;
+   text-align: center;
+}
+  @media screen and (max-width: 400px) {
+   .large-text {
+       font-size: 16px;
+   }
+   .optionClass {
+      font-size: 20px;
+  } 
+}

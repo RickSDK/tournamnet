@@ -1,0 +1,99 @@
+<app-page-shell [navTitle]="'Edit League'" [icon]="'fa-pencil'">
+
+    <div>{{league.name}} - Season {{league.season}} (Week {{week}})</div>
+
+    <div class="blackBox">
+        <div>Players In Game</div>
+
+        <table class="drTable">
+            <tr>
+                <th>Move</th>
+                <th>Place</th>
+                <th>Name</th>
+                <th>Points</th>
+                <th>Money</th>
+                <th>Rebuy?</th>
+                <th>Remove</th>
+            </tr>
+            <tr *ngFor="let player of displayPlayers; let i = index">
+                <td>
+                    <app-button [disabled]="player.place==1" (click)="moveToTop(player)" [icon]="'fast-backward'">
+                    </app-button>
+                    <app-button [disabled]="player.place==1" (click)="moveUp(player)" [icon]="'backward'"></app-button>
+                    <app-button [disabled]="player.place == displayPlayers.length" (click)="moveDown(player)"
+                        [icon]="'forward'"></app-button>
+                    <app-button [disabled]="player.place == displayPlayers.length" (click)="moveToBottom(player)"
+                        [icon]="'fast-forward'"></app-button>
+                </td>
+                <td>
+                    <input type="text" [value]="player.place" (click)="$event.target.value=''"
+                        (change)="updatePlayerPlace(player, $event.target.value)" style="width: 40px;">
+                </td>
+                <td>
+                    <div>{{player.name}}</div>
+                    <div style="font-size: 10px; font-weight: 700;">{{player.username}}</div>
+                </td>
+                <td>{{player.points}}</td>
+                <td>
+                    <input type="number" [value]="player.money" (click)="$event.target.value=''"
+                        (input)="updatePlayerMoney(player, $event.target.value)" style="width: 80px;">
+                </td>
+                <td>
+                    <i (click)="rebuyClicked(player)" *ngIf="!player.rebuyFlg" class="fa fa-square-o"
+                        style="font-size: 24px;"></i>
+                    <i (click)="rebuyClicked(player)" *ngIf="player.rebuyFlg" class="fa fa-check-square-o"
+                        style="font-size: 24px;"></i>
+                </td>
+                <td>
+                    <app-button (click)="removePlayer(player)" [icon]="'trash'" [butStyle]="5"></app-button>
+                </td>
+            </tr>
+        </table>
+
+        <div *ngIf="displayPlayers.length==0" style="background-color: yellow;">Start with first place player</div>
+
+
+        <div *ngIf="displayPlayers.length>0">
+            <app-button (click)="saveGame()" [name]="'Save Game'" [icon]="'floppy-o'"></app-button>
+        </div>
+    </div>
+    <div class="blackBox" style="display: inline-block;">
+
+        <div style="border: 1px solid black; border-radius: 5px; padding: 5px; box-shadow: 1px 1px 3px #444;">
+            <div style="font-size: 14px;"><b>Add Existing Player</b></div>
+            <div>
+                <div class="btn-group">
+                    <button type="button" (click)="buttonIdx=0" class="btn-default roundButton segmentButton"
+                        [ngStyle]="ngStyleSegment(buttonIdx,0)"> Name
+                    </button>
+                    <button type="button" (click)="buttonIdx=1" class="btn-default roundButton segmentButton"
+                        [ngStyle]="ngStyleSegment(buttonIdx,1)"> Username
+                    </button>
+                </div>
+            </div>
+
+            <select id="playerSelect" class="form-control" *ngIf="buttonIdx==0">
+                <option *ngFor="let option of players">{{option}}</option>
+            </select>
+            <select id="playerSelect2" class="form-control" *ngIf="buttonIdx==1">
+                <option *ngFor="let option of usernames">{{option}}</option>
+            </select>
+            <div>
+                <app-button (click)="addExistingPlayer()" [name]="'Add Existing Player'" [icon]="'plus'"></app-button>
+            </div>
+        </div>
+
+        <hr>
+        <div style="border: 1px solid black; border-radius: 5px; padding: 5px; box-shadow: 1px 1px 3px #444;">
+            <div style="font-size: 14px;"><b>Add New Player</b></div>
+            <div><input type="text" id="name" placeholder="Name"></div>
+            <div><input type="text" id="username" placeholder="Screen Name"></div>
+            <div>
+                <app-button (click)="addNewPlayer()" [name]="'Add New Player'" [icon]="'plus'"></app-button>
+            </div>
+        </div>
+    </div>
+
+</app-page-shell>
+
+<app-info-popup #infoPopup></app-info-popup>

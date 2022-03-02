@@ -1,0 +1,119 @@
+<app-page-shell [navTitle]="'Player Detail'" [icon]="'fa-user'">
+    <img src="assets/graphics/poker-tournament.png" class="image">
+
+    <div class="blackBox" *ngIf="thisPlayer">
+
+
+        <!--<app-loading-bar *ngIf="loadingFlg"></app-loading-bar>-->
+        <div style="font-size: 24px; font-weight: 700;" [title]="thisPlayer.id">{{thisPlayer.username}}
+            <span style="font-size: 12px;">({{thisPlayer.name}})</span>
+        </div>
+
+        <div *ngIf="awards.length>0">
+            <div><b>Awards</b></div>
+            <div *ngFor="let award of awards" class="awardClass">
+                <div *ngIf="award.award_id == 1">
+                    Point Leader
+                    <div><i class="fa fa-bullseye" style="font-size: 48px; color: purple;"></i></div>
+                </div>
+                <div *ngIf="award.award_id == 2">
+                    Money Leader
+                    <div><i class="fa fa-money" style="font-size: 48px; color: purple;"></i></div>
+                </div>
+                <div *ngIf="award.award_id == 3">
+                    Most Cashed
+                    <div><i class="fa fa-usd" style="font-size: 48px; color: purple;"></i></div>
+                </div>
+                <div *ngIf="award.award_id == 4">
+                    Most Wins
+                    <div><i class="fa fa-certificate" style="font-size: 48px; color: purple;"></i></div>
+                </div>
+                <div *ngIf="award.award_id == 5">
+                    Championship Win
+                    <div><i class="fa fa-trophy" style="font-size: 48px; color: purple;"></i></div>
+                </div>
+
+
+                <div style="font-size: 12px; color: green;">Season {{award.season}}</div>
+                <div class="highlightedText" style="font-size: 24px;">{{award.amount}}</div>
+            </div>
+        </div>
+
+        <div *ngIf="lifetimeStats && lifetimeStats.points>0">
+            <div><b>Lifetime Stats</b></div>
+            <table class="drTable">
+                <tr>
+                    <th>Games</th>
+                    <th>Cashed</th>
+                    <th>Wins</th>
+                    <th>Rebuys</th>
+                    <th>Money</th>
+                    <th>Points</th>
+                </tr>
+                <tr>
+                    <td>{{lifetimeStats.games}}</td>
+                    <td>{{lifetimeStats.cashedGames}}</td>
+                    <td>{{lifetimeStats.wins}}</td>
+                    <td>{{lifetimeStats.rebuys}}</td>
+                    <td>{{lifetimeStats.moneyStr}}</td>
+                    <td><b>{{lifetimeStats.points}}</b></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div><b>Season Stats</b></div>
+        <table class="drTable">
+            <tr>
+                <th>Season</th>
+                <th>Games</th>
+                <th>Wins</th>
+                <th>Money</th>
+                <th>Total Pts</th>
+            </tr>
+            <tr *ngFor="let season of thisPlayer.seasonData">
+                <td>{{season.name}}</td>
+                <td>{{season.gameStr}}</td>
+                <td>{{season.wins}}</td>
+                <td>{{season.moneyStr}}</td>
+                <td><b>{{season.points}}</b></td>
+            </tr>
+        </table>
+        <div class="btn-group">
+            <button *ngFor="let num of seasonList" (click)="gotoSeason(num)" type="button"
+                class="btn-default roundButton segmentButton" [ngClass]="ngClassSegment(season,num)">
+                <div class="menu-title">Season {{num}}</div>
+            </button>
+        </div>
+        <app-loading-bar *ngIf="loadingSeasonFlg"></app-loading-bar>
+        <table class="drTable" *ngIf="thisPlayer.games.length>0 && !loadingSeasonFlg">
+            <tr>
+                <th>Games</th>
+                <th>Wins</th>
+                <th>Stk</th>
+                <th>$</th>
+                <th>Points</th>
+            </tr>
+            <tr>
+                <td>{{thisPlayer.gameStr}}</td>
+                <td>{{thisPlayer.wins}}</td>
+                <td>{{thisPlayer.streak}}</td>
+                <td>{{thisPlayer.moneyStr}}</td>
+                <td><b>{{thisPlayer.points}}</b></td>
+            </tr>
+        </table>
+
+        <table class="drTable" *ngIf="!loadingSeasonFlg">
+            <tr>
+                <th>Week</th>
+                <th>Points</th>
+                <th>Money</th>
+            </tr>
+            <tr *ngFor="let game of thisPlayer.games">
+                <td>{{game.week}}</td>
+                <td [ngStyle]="ngStyleGame(game)"><i *ngIf="game.wins>0" class="fa fa-trophy"></i> {{game.points}}</td>
+                <td>{{game.money}}</td>
+            </tr>
+        </table>
+    </div>
+</app-page-shell>

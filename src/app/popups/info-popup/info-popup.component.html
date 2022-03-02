@@ -1,0 +1,18 @@
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 320px;">
+        <div class="modal-content" [ngStyle]="ngStyleButton(2)">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body" style="text-align: center; font-size: 20px;">
+
+                <p>{{message}}</p>
+
+                <app-button [name]="'Ok'" (click)="okButtonPressed()" [class]="'width90'"></app-button>
+
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

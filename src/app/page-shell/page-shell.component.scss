@@ -1,0 +1,50 @@
+.page-outer {
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.page-middle {
+    padding-top: 60px;
+    display: inline-block; 
+    width: 100%; 
+    height: 100%;
+    max-width: 800px; 
+    background-color: #575; 
+    box-shadow: 4px 4px 7px #000;
+    text-align: center;
+}
+.page-inner {
+    background-color: #575; 
+}
+.navigation-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 800px;
+    background-color: #080; 
+    color: white; 
+    font-size: 24px; 
+    padding: 10px;
+    height: 60px;
+    box-shadow: 2px 2px 4px #000;
+    z-index: 100;
+}
+.icon-left {
+    font-size: 28px; 
+    float: left;
+    cursor: pointer;
+}
+.icon-left:hover {
+    color: white;
+}
+.navTitleBar {
+    font-size: 20px;
+    font-weight: 700;
+    display: inline-block;
+    margin-top: -7px;
+}
+.navTitle {
+    font-size: 12px;
+}
+
