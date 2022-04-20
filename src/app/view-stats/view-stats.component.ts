@@ -47,8 +47,8 @@ export class ViewStatsComponent extends BaseHttpComponent implements OnInit {
       console.log('xxx', this.data);
       if (this.league) {
         this.minGames = this.league.season * 2;
-        if (this.minGames > 10)
-          this.minGames = 10;
+        if (this.minGames > 6)
+          this.minGames = 6;
         console.log('league', this.league);
         localStorage.league = JSON.stringify(this.league);
       }
