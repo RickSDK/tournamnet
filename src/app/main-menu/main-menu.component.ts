@@ -242,4 +242,22 @@ export class MainMenuComponent extends BaseHttpComponent implements OnInit {
   edit() {
     this.editLeaguePopupComponent.show(this.league.id, this.season, this.league.week);
   }
+  calc() {
+    var dataList = [];
+    this.displayData.forEach(player => {
+      dataList.push(player.id + ':' + player.place);
+    });
+    var data = dataList.join('|');
+    var params = {
+      action: 'updatePlace',
+      league_id: this.league.id,
+      season: this.season,
+      data: data
+    };
+    console.log(params);
+    console.log(this.user.id);
+    this.executeApi('leagueApi.php', params, true);
+
+
+  }
 }

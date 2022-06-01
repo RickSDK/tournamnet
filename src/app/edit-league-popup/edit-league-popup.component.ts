@@ -81,6 +81,8 @@ export class EditLeaguePopupComponent extends BaseHttpComponent implements OnIni
         awards.push({ id: 4, user_id: player.id, amount: mostWins });
     });
 
+    awards.push({ id: 5, user_id: 1, amount: 1 }); // tournament winner placeholder
+    
     console.log('mostMoney', mostMoney);
     console.log('mostGamesCashed', mostGamesCashed);
     console.log('mostPoints', mostPoints);

@@ -69,7 +69,7 @@ export class PlayerDetailComponent extends BaseHttpComponent implements OnInit {
     if (!data)
       return;
 
-    //console.log('xxx', data);
+    console.log('xxx', data);
     var parts = data.split('<a>');
     //console.log(parts);
     if (parts.length > 1) {
@@ -129,9 +129,14 @@ export class PlayerDetailComponent extends BaseHttpComponent implements OnInit {
     seasonStats.forEach(line => {
       if (line) {
         var c = line.split('|');
-        seasonData.push({ name: c[0], gameStr: c[1], money: c[2], moneyStr: formatNumberToLocalCurrency(c[2]), wins: c[3], points: c[4], games: c[5] });
+        var temp = c[0].split(' ');
+        var season = '1';
+        if (temp.length > 0)
+          season = temp[1];
+        seasonData.push({ name: c[0], season: season, gameStr: c[1], money: c[2], moneyStr: formatNumberToLocalCurrency(c[2]), wins: c[3], points: c[4], games: c[5], place: c[6], ordSuf: ordinal_suffix_of(c[6]), awards: c[7] });
       }
     });
+    console.log('xxx', seasonData);
     return seasonData;
   }
   seasonDataFromLine(line: string) {
@@ -139,6 +144,7 @@ export class PlayerDetailComponent extends BaseHttpComponent implements OnInit {
     var players = [];
     var playerHash = {};
     lines.forEach(line => {
+      console.log(line);
       if (line && line.length > 10) {
         var c = line.split('|');
         var rebuys = numberVal(c[10]);
@@ -157,4 +163,19 @@ export class PlayerDetailComponent extends BaseHttpComponent implements OnInit {
     });
     return players;
   }
+}
+
+function ordinal_suffix_of(i) {
+  var j = i % 10,
+    k = i % 100;
+  if (j == 1 && k != 11) {
+    return i + "st";
+  }
+  if (j == 2 && k != 12) {
+    return i + "nd";
+  }
+  if (j == 3 && k != 13) {
+    return i + "rd";
+  }
+  return i + "th";
 }

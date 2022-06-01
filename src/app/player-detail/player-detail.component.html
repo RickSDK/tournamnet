@@ -65,14 +65,18 @@
         <div><b>Season Stats</b></div>
         <table class="drTable">
             <tr>
-                <th>Season</th>
+                <th><span class="hidden-sm">Season</span><span class="hidden-md">S</span></th>
+                <th>Place</th>
+                <th>Awards</th>
                 <th>Games</th>
                 <th>Wins</th>
                 <th>Money</th>
-                <th>Total Pts</th>
+                <th>Pts</th>
             </tr>
             <tr *ngFor="let season of thisPlayer.seasonData">
-                <td>{{season.name}}</td>
+                <td>{{season.season}}</td>
+                <td><span *ngIf="season.place>0">{{season.ordSuf}}</span></td>
+                <td><span *ngIf="season.awards>0">{{season.awards}}</span></td>
                 <td>{{season.gameStr}}</td>
                 <td>{{season.wins}}</td>
                 <td>{{season.moneyStr}}</td>
@@ -82,13 +86,13 @@
         <div class="btn-group">
             <button *ngFor="let num of seasonList" (click)="gotoSeason(num)" type="button"
                 class="btn-default roundButton segmentButton" [ngClass]="ngClassSegment(season,num)">
-                <div class="menu-title">Season {{num}}</div>
+                <div class="menu-title"><span class="hidden-sm">Season</span> <div style="font-size: 30px; font-weight: 700;">{{num}}</div></div>
             </button>
         </div>
         <app-loading-bar *ngIf="loadingSeasonFlg"></app-loading-bar>
         <table class="drTable" *ngIf="thisPlayer.games.length>0 && !loadingSeasonFlg">
             <tr>
-                <th>Games</th>
+                <th>Season {{season}}</th>
                 <th>Wins</th>
                 <th>Stk</th>
                 <th>$</th>

@@ -5,7 +5,7 @@
     <div class="btn-group2">
         <button *ngFor="let num of seasonList" (click)="gotoSeason(num)" type="button"
             class="btn-default roundButton segmentButton" [ngClass]="ngClassSegment(season,num)">
-            <div style="font-size: 10px;">Season</div>
+            <div style="font-size: 10px;"><span class="hidden-sm">Season</span></div>
             <div style="font-size: 24px;"><b>{{num}}</b></div>
         </button>
         <app-button *ngIf="league" [routerLink]="['/view-stats']" [queryParams]="{league: league.id, season: season}"
@@ -51,6 +51,7 @@
     </table>
     <div><i class="fa fa-star-o"></i> - Top 5 spots earn discount into Championship Game</div>
     <app-button *ngIf="user.id" (click)="edit()" [name]="'Edit League'" [icon]="'pencil'"></app-button>
+    <app-button *ngIf="user.id==1" (click)="calc()" [name]="'Calc'" [icon]="'calculator'"></app-button>
 
 
 
